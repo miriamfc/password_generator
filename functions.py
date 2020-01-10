@@ -3,8 +3,8 @@
 def get_password_length():
     
     """Function asking the user to input the desired password length."""
-    check = False
     
+    check = False
     while check == False:
         password_length = input("Please enter the desired password length (from 1 to 20):")
         try:
@@ -17,6 +17,29 @@ def get_password_length():
             continue
         check = True        
     return password_length
+   
+
+def get_password_criteria():
+    
+    """Function collecting user password criteria."""
+    
+    user_choices = dict()
+    type_list = ["Uppercase","Lowercase","Numbers","Symbols"]
+    print("Please select password character types:")
+    for asked_type in type_list:
+        check = False
+        while check == False:
+            chosen_type = input("- {} (y/n):".format(asked_type))
+            if (chosen_type.lower() != "y") and (chosen_type.lower() != "n"):
+                print("Please enter 'y' for 'yes', or 'n' for 'no'.")
+            elif chosen_type.lower() == "y":
+                user_choices[asked_type]=True
+                check = True
+            else:
+                user_choices[asked_type]=False
+                check = True
+    return user_choices
+
 
 def get_security_level(password_length,user_choices):
     
@@ -32,90 +55,26 @@ def get_security_level(password_length,user_choices):
         security_level = "STRONG"
     return security_level
 
-def set_characters_range(user_choices):
+
+def generate_password(password_length, user_choices):
     
-    """Function returning a list of candidate characters
-    for the generate_password function."""
+    """Function generating a random password based on the criteria selected by the user."""
     
     import string
-    characters_dict =        {"Lowercase" :[letter for letter in string.ascii_lowercase],         "Uppercase" :[letter for letter in string.ascii_uppercase],         "Numbers":[digit for digit in string.digits],         "Symbols":[punctuation for punctuation in string.punctuation]}
+    import random
+    
+    #Generating the characters range from which the password will be drawn
+    characters_dict =\
+    {"Lowercase" :[letter for letter in string.ascii_lowercase],\
+     "Uppercase" :[letter for letter in string.ascii_uppercase],\
+     "Numbers":[digit for digit in string.digits],\
+     "Symbols":[punctuation for punctuation in string.punctuation]}
     characters_range = list()
     for key in characters_dict:
         if user_choices[key]==True:
             characters_range+=characters_dict[key]
-    return characters_range
-
-def create_choice_item(user_input,type_asked,choices_dict):
-    if user_input.lower() == "yes":
-        choices_dict[type_asked]=True
-    else:
-        choices_dict[type_asked]=False
-
-def refine_choice():
     
-    choices = dict()
+    #Generating random password
+    password = "".join(random.choices(characters_range, k=password_length))
     
-    check=False
-    
-    while check == False:    
-        uppercase = input("Would you like to use uppercase letters (ABC...)? Type yes or no")
-        if uppercase.lower() != "yes" and uppercase.lower() != "no":
-            print("Please use only two words, 'yes' or 'no'. Numbers and\or other words not accepted.")
-        else:
-            create_choice_item(uppercase,"Uppercase",choices)
-            check = True
-            
-    
-    check=False
-    
-    while check == False:
-        lowercase = input("Now, would you like to use lowercase letters (abc...)? Type yes or no")
-        if lowercase.lower() != "yes" and lowercase.lower() != "no":
-            print("Please use only two words, 'yes' or 'no'. Numbers and\or other words not accepted.")
-        else:
-            create_choice_item(lowercase,"Lowercase",choices)
-            check = True
-            
-    
-    check=False
-    
-    while check == False:
-        numbers = input("Now, would you like to use numbers (123...)? Type yes or no")
-        if numbers.lower() != "yes" and numbers.lower() != "no":
-            print("Please use only two words, 'yes' or 'no'. Numbers and\or other words not accepted.")
-        else:
-            create_choice_item(numbers,"Numbers",choices)
-            check = True
-    
-    
-    check = False
-    
-    while check == False:
-        symbols = input("Now, would you like to use special symbols (!$#...)? Type yes or no")
-        if symbols.lower() != "yes" and symbols.lower() != "no":
-            print("Please use only two words, 'yes' or 'no'. Numbers and\or other words not accepted.")
-        else:
-            create_choice_item(symbols,"Symbols",choices)
-            check = True
-    
-    return choices 
-
-def generate_password(characters_range, password_length):
-    
-    import random
-    
-    characters_range=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    
-    final_password = "".join(random.choices(characters_range, k=password_length))
-    print(final_password)
-
-"""def check_password(final_password):
-    
-    for i in final_password:
-        
-check1 = "1234567890-="
-check2 = "qwertyuiop[]"
-check3 = "asdfghjkl;'\'"
-check4 = "zxcvbnm,./"
-"""
-
+    return password
