@@ -1,9 +1,9 @@
 # coding: utf-8
 
-print("***WELCOME TO OUR PASSWORD GENERATOR!***\n")
-
 import time
 from functions import *
+
+print("*** WELCOME TO OUR PASSWORD GENERATOR ***")
 
 while True:
 
@@ -34,10 +34,10 @@ while True:
             print("Please give us more context about this password:")
             website = input("-Website:")
             username = input("-Username:")
+            #Load previous passwords as a dictionnary {website:(username,password)}
             saved_passwords = get_saved_passwords()
-            #Loads previous passwords
+            #Add new password to the loaded dictionnary, and rewrite the saved-passwords file accordingly
             save_password(saved_passwords, website, username, password)
-            #Adds new password to the loaded dictonnary, and rewrites the saved-passwords file accordingly
             break
         if selection.lower() == "n":
             break
