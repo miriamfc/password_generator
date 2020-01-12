@@ -55,6 +55,33 @@ def get_characters_range(user_choices):
             characters_range+=characters_dict[key]
     return characters_range
 
+def is_keyboard_neighbour(character_1,character_2):
+
+    """Function checking wether 2 characters are neighbours on an AZERTY keyboard."""
+
+    keyboard_sequences = ["#1234567890°_","@&é\"'(§è!çà)-","azertyuiop^$",\
+    "azertyuiop¨*","qsdfghjklmù`","qsdfghjklm%£","<wxcvbn,;:=",">wxcvbn?./+"]
+    check_neighbour = False
+    for sequence in keyboard_sequences:
+        if (character_1 in sequence) and (character_2 in sequence):
+            if abs(sequence.index(character_1) - sequence.index(character_2))==1:
+                check_neighbour = True
+                break
+    return check_neighbour
+
+def is_keyboard_sequence(password):
+
+    """Function checking wether a password contains 2 neighbour characters on an AZERTY keyboard."""
+
+    i = 0
+    check_sequence = False
+    while i < len(password)-1:
+        if is_keyboard_neighbour(password.lower()[i],password.lower()[i+1]):
+            check_sequence = True
+            break
+        i+=1
+    return check_sequence
+
 def generate_password(password_length, characters_range, user_choices):
     
     """Function generating a random password based on the criteria selected by the user."""
@@ -68,7 +95,8 @@ def generate_password(password_length, characters_range, user_choices):
         if sum(character.isupper() for character in password) >= user_choices["Uppercase"]\
             and sum(character.islower() for character in password) >= user_choices["Lowercase"]\
             and sum(character.isdigit() for character in password) >= user_choices["Numbers"]\
-            and sum(character in string.punctuation for character in password) >= user_choices["Symbols"]:
+            and sum(character in string.punctuation for character in password) >= user_choices["Symbols"]\
+            and is_keyboard_sequence(password)==False:
             break
     return password
 
