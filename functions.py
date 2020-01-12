@@ -126,8 +126,13 @@ def save_password(saved_passwords, website, username, password):
         pickle.Pickler(file).dump(saved_passwords)
 
 class Time():
+
+    """Class creating time objects from a number of seconds,
+    and returning 5 attributes: seconds, minutes, hours, days and years."""
     
-    def __init__(self,seconds=0):
+    def __init__(self,seconds):
+
+        """Constructor of class objects."""
         
         self.seconds = seconds
         self.minutes = 0
@@ -149,6 +154,10 @@ class Time():
             self.days = self.days%365
 
     def __str__(self):
+
+        """Special method redefining how class objects are printed:
+        - Only the top non-null attribute is printed (ex: 2 years 32 days 15 hours will be printed as "2 years")
+        - If the top non-null attribute is seconds, and self.seconds < 1, the object will be printed as "less than 1 second". """
         
         if self.years>0:
             display=str(round(self.years))+" years"
