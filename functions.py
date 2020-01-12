@@ -160,16 +160,16 @@ class Time():
         - If the top non-null attribute is seconds, and self.seconds < 1, the object will be printed as "less than 1 second". """
         
         if self.years>0:
-            display=str(round(self.years))+" years"
+            display="{} years".format(round(self.years))
         elif self.days>0:
-            display+=str(round(self.days))+" days"
+            display="{} days".format(round(self.days))
         elif self.hours>0:
-            display+=str(round(self.hours))+" hours"
+            display="{} hours".format(round(self.hours))
         elif self.minutes>0:
-            display+=str(round(self.minutes))+" minutes"
+            display="{} minutes".format(round(self.minutes))
         elif self.seconds<1:
             display = "less than 1 second"
         elif self.seconds>1:
-            display+=str(round(self.seconds))+" seconds"
+            display="{} seconds".format(round(self.seconds))
     
-        return display.strip()
+        return display
