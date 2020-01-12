@@ -25,7 +25,7 @@ else:
                 saved_passwords[website]
             except KeyError:
                 print("No password has been saved for {}. Please enter a new one.".format(website))
-                continue 
+                continue
             print("- Username:",saved_passwords[website][0])
             print("- Password:",saved_passwords[website][1])
             break

@@ -24,8 +24,9 @@ while True:
     
     #Display associated security level
     security_level, guess_time_sec = get_password_strength(password_length,characters_range)
+    guess_time = Time(guess_time_sec)
     print("Security level: {}".format(security_level))
-    print("A brute-force attack could guess your password in {} seconds.\n".format(guess_time_sec))
+    print("A brute-force attack could guess your password in {}.\n".format(guess_time))
 
     #Save generated password
     while True:

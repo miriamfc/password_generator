@@ -124,3 +124,43 @@ def save_password(saved_passwords, website, username, password):
     saved_passwords[website] = (username, password)
     with open("saved-passwords","wb") as file:
         pickle.Pickler(file).dump(saved_passwords)
+
+class Time():
+    
+    def __init__(self,seconds=0):
+        
+        self.seconds = seconds
+        self.minutes = 0
+        self.hours = 0
+        self.days = 0
+        self.years = 0
+        
+        if self.seconds>=60:
+            self.minutes = self.seconds//60
+            self.seconds = self.seconds%60
+        if self.minutes>=60:
+            self.hours = self.minutes//60
+            self.minutes = self.minutes%60
+        if self.hours>=24:
+            self.days = self.hours//24
+            self.hours = self.hours%24
+        if self.days>=365:
+            self.years = self.days//365
+            self.days = self.days%365
+
+    def __str__(self):
+        
+        if self.years>0:
+            display=str(round(self.years))+" years"
+        elif self.days>0:
+            display+=str(round(self.days))+" days"
+        elif self.hours>0:
+            display+=str(round(self.hours))+" hours"
+        elif self.minutes>0:
+            display+=str(round(self.minutes))+" minutes"
+        elif self.seconds<1:
+            display = "less than 1 second"
+        elif self.seconds>1:
+            display+=str(round(self.seconds))+" seconds"
+    
+        return display.strip()
