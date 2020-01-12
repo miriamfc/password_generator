@@ -15,7 +15,7 @@
 ## Project Description
 For our first project we chose password generation challenge, in order to get experience with multitude of functions, user inputs and basic security.
 
-## Rules
+## App purpose
 Select your options and get randomly generated, complex password. Possibilities to store your passwords together with domain and username, search function for stored data.
 
 ## Workflow
@@ -28,7 +28,5 @@ Tools used: git, trello, jupyter, mspaint to map possible basic GUI.
 Project repo holds readme file for basic overview, python files functions.py, password-directory.py and password-generator.py. Each one holds corresponding parts of the code.
 
 ## Links
-Include links to your repository, slides and kanban board. Feel free to include any other links associated with your project.
-
 [Repository](https://github.com/Aciago/password_generator)  
 [Trello](https://trello.com/b/fEWbSlQu/project1)  
