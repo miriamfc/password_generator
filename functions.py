@@ -43,6 +43,7 @@ def get_characters_range(user_choices):
     """Function generating the characters range from which the password will be drawn."""
     
     import string
+
     characters_dict =\
         {"Lowercase" :[letter for letter in string.ascii_lowercase],\
         "Uppercase" :[letter for letter in string.ascii_uppercase],\
@@ -60,6 +61,7 @@ def generate_password(password_length, characters_range, user_choices):
     
     import string
     import secrets
+
     while True:
         password = "".join(secrets.choice(characters_range) for i in range(password_length))
         #The secrets module is used for generating cryptographically strong random numbers.
@@ -97,3 +99,28 @@ def get_password_strength(password_length,characters_range):
     guess_time_sec = max_attempts/(attempts_per_sec*2)
 
     return security_level, guess_time_sec
+
+def get_saved_passwords():
+
+    """Function returning the dictionnary of previously saved passwords."""
+
+    import os
+    import pickle
+
+    if os.path.exists("saved-passwords"):
+        with open("saved-passwords","rb") as file:
+            saved_passwords = pickle.Unpickler(file).load()
+    else:
+            saved_passwords = dict()
+    return saved_passwords
+
+def save_password(saved_passwords, website, username, password):
+
+    """Function saving passwords in a "saved-passwords" file
+    under the follwoing dictionary format : {website: (username,password)}."""
+
+    import pickle
+
+    saved_passwords[website] = (username, password)
+    with open("saved-passwords","wb") as file:
+        pickle.Pickler(file).dump(saved_passwords)
