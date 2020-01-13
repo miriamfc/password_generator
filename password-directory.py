@@ -18,7 +18,7 @@ else:
         for key in saved_passwords:
             print("- {}".format(key))
 
-        #Ask user for searched website, and displays associated username and password
+        #Ask user for searched website, and display associated username and password
         while True:
             website = input("\nPlease enter the website you're looking for:")
             try:

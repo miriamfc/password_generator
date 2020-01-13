@@ -43,7 +43,7 @@ def get_password_criteria():
             break
     return user_choices
 
-def get_characters_range(user_choices):
+def generate_characters_range(user_choices):
     
     """Function generating the characters range from which the password will be drawn."""
     
@@ -60,7 +60,7 @@ def get_characters_range(user_choices):
             characters_range+=characters_dict[key]
     return characters_range
 
-def is_keyboard_neighbour(character_1,character_2):
+def are_keyboard_neighbours(character_1,character_2):
 
     """Function checking wether 2 characters are neighbours on an AZERTY keyboard."""
 
@@ -81,7 +81,7 @@ def is_keyboard_sequence(password):
     i = 0
     check_sequence = False
     while i < len(password)-1:
-        if is_keyboard_neighbour(password.lower()[i],password.lower()[i+1]):
+        if are_keyboard_neighbours(password.lower()[i],password.lower()[i+1]):
             check_sequence = True
             break
         i+=1

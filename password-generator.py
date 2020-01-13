@@ -16,7 +16,7 @@ while True:
         print("Generating password...")
         time.sleep(0.5)
         
-    characters_range = get_characters_range(user_choices)
+    characters_range = generate_characters_range(user_choices)
     password = generate_password(password_length, characters_range, user_choices)
     
     #Display password
