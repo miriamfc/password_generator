@@ -25,17 +25,22 @@ def get_password_criteria():
     user_choices = dict()
     type_list = ["Uppercase","Lowercase","Numbers","Symbols"]
     print("Step 2 - Please select password character types:")
-    for asked_type in type_list:
-        while True:
-            chosen_type = input("- {} (y/n):".format(asked_type))
-            if (chosen_type.lower() != "y") and (chosen_type.lower() != "n"):
-                print("Please enter 'y' for 'yes', or 'n' for 'no'.")
-            elif chosen_type.lower() == "y":
-                user_choices[asked_type]=True
-                break
-            else:
-                user_choices[asked_type]=False
-                break
+    while True:
+        for asked_type in type_list:
+            while True:
+                chosen_type = input("- {} (y/n):".format(asked_type))
+                if (chosen_type.lower() != "y") and (chosen_type.lower() != "n"):
+                    print("Please enter 'y' for 'yes', or 'n' for 'no'.")
+                elif chosen_type.lower() == "y":
+                    user_choices[asked_type]=True
+                    break
+                else:
+                    user_choices[asked_type]=False
+                    break
+        if sum([user_choices[key] for key in user_choices])==0:
+            print("Please select at least one of the 4 options.")
+        else:
+            break
     return user_choices
 
 def get_characters_range(user_choices):
