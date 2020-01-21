@@ -8,6 +8,8 @@ def get_password_length():
         password_length = input("\nStep 1 - Please enter the desired password length (from 1 to 20):")
         try:
             password_length = int(password_length)
+            # could make this more simple by just checking if it is between 0 and 20 because then it has to be an integer
+            # could also maybe do this better by doing type=int because otherwise like this '3' is equal to 3
         except:
             print("Your input should be an integer.\n")
             continue
